@@ -1,6 +1,5 @@
-package com.example.demo.shop.product;
+package de.neuefische.cgnjava222.ordersystem.shop.product;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

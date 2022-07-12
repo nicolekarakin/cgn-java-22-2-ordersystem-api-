@@ -1,7 +1,5 @@
-package com.example.demo.shop.product;
+package de.neuefische.cgnjava222.ordersystem.shop.product;
 
-import com.example.demo.shop.order.Order;
-import com.example.demo.shop.order.OrderService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.demo.shop.order;
+package de.neuefische.cgnjava222.ordersystem.shop.order;
 
 import org.springframework.stereotype.Repository;
 

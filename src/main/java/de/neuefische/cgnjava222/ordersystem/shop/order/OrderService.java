@@ -1,7 +1,7 @@
-package com.example.demo.shop.order;
+package de.neuefische.cgnjava222.ordersystem.shop.order;
 
-import com.example.demo.shop.product.Product;
-import com.example.demo.shop.product.ProductService;
+import de.neuefische.cgnjava222.ordersystem.shop.product.Product;
+import de.neuefische.cgnjava222.ordersystem.shop.product.ProductService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
