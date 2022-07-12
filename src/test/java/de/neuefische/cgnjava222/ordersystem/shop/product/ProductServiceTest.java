@@ -14,8 +14,8 @@ class ProductServiceTest {
     void getProduct() {
         //given
         ProductRepo productRepo = mock(ProductRepo.class);
-        ProductService productService = new ProductService(productRepo);
         when(productRepo.getProduct(2)).thenReturn(new Product(2, "Banane"));
+        ProductService productService = new ProductService(productRepo);
 
         //when
         Product actual = productService.getProduct(2);
