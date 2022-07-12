@@ -19,9 +19,6 @@ class OrderServiceTest {
         ProductService productService = mock(ProductService.class);
         OrderRepo orderRepo = mock(OrderRepo.class);
         OrderService orderService = new OrderService(productService, orderRepo);
-        when(productService.getProduct(1)).thenReturn(new Product(1, "Apfel"));
-        when(productService.getProduct(3)).thenReturn(new Product(3, "Zitrone"));
-        when(productService.getProduct(4)).thenReturn(new Product(4, "Mandarine"));
         when(orderRepo.getOrder(106)).thenReturn(new Order(
                 106,
                 List.of(
@@ -57,7 +54,6 @@ class OrderServiceTest {
 
         //when
         orderService.addOrder(106, List.of(1, 3, 4));
-        Order actual = orderService.getOrder(106);
 
         //then
         verify(orderRepo).addOrder(new Order(
