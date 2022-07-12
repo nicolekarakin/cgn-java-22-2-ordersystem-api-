@@ -1,7 +1,6 @@
 package de.neuefische.cgnjava222.ordersystem.shop.order;
 
 import de.neuefische.cgnjava222.ordersystem.shop.product.Product;
-import de.neuefische.cgnjava222.ordersystem.shop.product.ProductRepo;
 import de.neuefische.cgnjava222.ordersystem.shop.product.ProductService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -10,14 +9,12 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class OrderServiceTest {
 
-
     @Test
-    void addAndGetOrder() {
+    void getOrder() {
         //given
         ProductService productService = mock(ProductService.class);
         OrderRepo orderRepo = mock(OrderRepo.class);
@@ -34,25 +31,22 @@ class OrderServiceTest {
                 )
         ));
         //when
-        orderService.addOrder(106, List.of(1, 3, 4));
         Order actual = orderService.getOrder(106);
 
         //then
         assertThat(actual)
-                .isEqualTo(
-                        new Order(
-                                106,
-                                List.of(
-                                        new Product(1, "Apfel"),
-                                        new Product(3, "Zitrone"),
-                                        new Product(4, "Mandarine")
-                                )
+                .isEqualTo(new Order(
+                        106,
+                        List.of(
+                                new Product(1, "Apfel"),
+                                new Product(3, "Zitrone"),
+                                new Product(4, "Mandarine")
                         )
-                );
+                ));
     }
 
     @Test
-    void addAndListOrders() {
+    void addOrder() {
         //given
         ProductService productService = mock(ProductService.class);
         OrderRepo orderRepo = mock(OrderRepo.class);
@@ -60,6 +54,28 @@ class OrderServiceTest {
         when(productService.getProduct(1)).thenReturn(new Product(1, "Apfel"));
         when(productService.getProduct(3)).thenReturn(new Product(3, "Zitrone"));
         when(productService.getProduct(4)).thenReturn(new Product(4, "Mandarine"));
+
+        //when
+        orderService.addOrder(106, List.of(1, 3, 4));
+        Order actual = orderService.getOrder(106);
+
+        //then
+        verify(orderRepo).addOrder(new Order(
+                106,
+                List.of(
+                        new Product(1, "Apfel"),
+                        new Product(3, "Zitrone"),
+                        new Product(4, "Mandarine")
+                )
+        ));
+    }
+
+    @Test
+    void listOrders() {
+        //given
+        ProductService productService = mock(ProductService.class);
+        OrderRepo orderRepo = mock(OrderRepo.class);
+        OrderService orderService = new OrderService(productService, orderRepo);
         when(orderRepo.listOrders()).thenReturn(List.of(
                 new Order(
                         106,
@@ -71,7 +87,6 @@ class OrderServiceTest {
                 )
         ));
         //when
-        orderService.addOrder(106, List.of(1, 3, 4));
         List<Order> actual = orderService.listOrders();
 
         //then
