@@ -5,13 +5,16 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class ProductServiceTest {
 
     @Test
     void getProduct() {
         //given
-        ProductRepo productRepo = new ProductRepo();
+        ProductRepo productRepo = mock(ProductRepo.class);
+        when(productRepo.getProduct(2)).thenReturn(new Product(2, "Banane"));
         ProductService productService = new ProductService(productRepo);
 
         //when
